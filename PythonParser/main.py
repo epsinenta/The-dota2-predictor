@@ -166,7 +166,7 @@ def parse_matches():
     return context
 
 if __name__ == '__main__':
-    a = read_pickle_file("/statistic/pro_players_id_dict")
+    a = read_pickle_file("statistic/pro_players_id_dict")
     print(a)
     '''
     df = pd.read_csv('matches.csv')
