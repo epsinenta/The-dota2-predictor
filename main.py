@@ -1,24 +1,12 @@
-import time
-
 from bs4 import BeautifulSoup
-import random
 from zenrows import ZenRowsClient
 import requests
 import pandas as pd
+from methods import read_pickle_file
+from constants import CLIENT_API, PARAMS
 
-client = ZenRowsClient("13ca0ec0fb07b2acca7653fa92acdccf9fee8e72")
-params = {"js_render":"true","antibot":"true"}
-
-user_agents = [
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
-    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15'
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15'
-]
-
+client = ZenRowsClient(CLIENT_API)
+params = PARAMS
 def find_all_id():
     f = open('id', 'r')
     a = f.readlines()[-1]
@@ -40,14 +28,6 @@ def get_winrate(team, player, hero):
 
     soup = BeautifulSoup(response.text, "html.parser")
     players_html = soup.findAll('div', class_='inner')
-
-    url = f'https://www.dotabuff.com/{players_html[0]["data-link-to"]}/heroes?metric=played'
-    response = client.get(url, params=params)
-
-    soup = BeautifulSoup(response.text, "html.parser")
-    heroes_html = soup.findAll('td', class_='cell-icon')
-    played_html = soup.findAll('td', class_='sorted')
-
 
     url = f'https://www.dotabuff.com/{players_html[0]["data-link-to"]}/heroes?metric=played'
     response = client.get(url, params=params)
@@ -78,11 +58,12 @@ def parse_match(id):
     url = f'https://ru.dltv.org/matches/{id}'
     page = requests.get(url)
     soup = BeautifulSoup(page.text, "html.parser")
-
     score_html = soup.findAll('div', class_='score__scores')
-    count = int(score_html[0].text.replace(' ', '').replace('\n', '')[0]) + \
-            int(score_html[0].text.replace(' ', '').replace('\n', '')[2])
-
+    try:
+        count = int(score_html[0].text.replace(' ', '').replace('\n', '')[0]) + \
+                int(score_html[0].text.replace(' ', '').replace('\n', '')[2])
+    except:
+        count = 0
     teams_html = soup.findAll('a', class_='team__stats-name')
     teams = []
     for team in teams_html:
@@ -104,26 +85,56 @@ def parse_match(id):
             score[i] = (score[i] + 1) % 2
 
 
-    players_html = soup.findAll('div', class_='cell__name')
+    players_html = soup.findAll('div', class_='cell__name')[:count * 10]
     players = []
-    for player in players_html:
-        players.append(player.text)
+    for i in range(count):
+        cur = []
+        for j in range(10):
+            player = players_html[i * 10 + j]
+            cur.append(player.text)
+        players.append(cur)
 
     heroes_html = soup.findAll('div', class_='pick pick-sm')
     heroes = []
-    for hero in heroes_html:
-        s = str(hero)[len('<div class="pick pick-sm" data-tippy-content="'):]
-        s = s[:s.index('"')]
-        heroes.append(s)
+    for i in range(count):
+        cur = []
+        for j in range(10):
+            hero = heroes_html[i * 10 + j]
+            s = str(hero)[len('<div class="pick pick-sm" data-tippy-content="'):]
+            s = s[:s.index('"')]
+            cur.append(s)
+        heroes.append(cur)
 
+    heroes_win_rate_dict = read_pickle_file('statistic/heroes_win_rate_dict')
+    heroes_winrates = []
+    for i in range(count):
+        cur = []
+        for j in range(10):
+            hero = heroes[i][j]
+            if hero == "Nature's Prophet":
+                hero = 'natures-prophet'
+            cur.append(heroes_win_rate_dict[hero])
+        heroes_winrates.append(cur)
+
+    heroes_counters_dict = read_pickle_file('statistic/heroes_counters_dict')
+    heroes_counters = []
+    for i in range(count):
+        cur = []
+        for j in range(5):
+            for k in range(5, 10):
+                hero1 = heroes[i][j]
+                hero2 = heroes[i][k]
+                cur.append(heroes_counters_dict[hero1][hero2])
+        heroes_counters.append(cur)
+    '''
     players_on_heroes = []
-
     for i in range(count):
         cur = []
         for j in range(10):
             cur.append(players[i * 10 + j] + " on " + heroes[i * 10 + j])
         players_on_heroes.append(cur)
-    #TODO: сделать винрейты
+    '''
+    '''
     winrates = []
     for i in range(count):
         cur = []
@@ -134,32 +145,44 @@ def parse_match(id):
                 cur_team = all_teams[i][1]
             cur.append(get_winrate(cur_team, players[i * 10 + j], heroes[i * 10 + j]))
         winrates.append(cur)
-
+    '''
+    winrates = [[50.0] * 10] * count
     result = []
     for i in range(count):
-        result.append([score[i], *all_teams[i], *players_on_heroes[i], *winrates[i]])
-
-
+        result.append([score[i], *all_teams[i], *players[i], *winrates[i], *heroes_winrates[i], *heroes_counters[i]])
+    print(id, 123)
     return result
 
 
 def parse_matches():
     last_match = int(open('const', 'r').readlines()[0])
-    context = parse_match(last_match)
+    print(last_match)
+    try:
+        context = parse_match(last_match)
+    except:
+        context = []
     last_match -= 1
     open('const', 'w').write(str(last_match))
     return context
 
 if __name__ == '__main__':
+    a = read_pickle_file("/statistic/pro_players_id_dict")
+    print(a)
+    '''
     df = pd.read_csv('matches.csv')
+    df.drop(df.columns[[0]], axis=1, inplace=True)
     print(df)
-    for i in range(10):
-        cur_matches = parse_matches()
-        for match in cur_matches:
-            df.loc[-1] = [0, *match]
-            df.index = df.index + 1
-            df = df.sort_index()
-
-    df.to_csv('matches.csv')
+    #df = pd.DataFrame([[1, 'Sporkface Killaz', 'Bullish on Gaming', 'Kurona', 'babitich', 'jah', 'Chola', 'Fayde', 'Mark', 'Froogoss', 'NFLS.ClouD', 'Harold', 'Double King', 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, '49.41', '51.04', '54.92', '50.19', '51.85', '47.34', '46.43', '48.89', '50.24', '48.96', 0.5, -0.54, -0.59, 0.54, 0.37, 0.48, -0.15, 1.57, 1.07, 1.59, -0.53, -0.23, 2.78, 0.27, -0.28, 1.16, -0.71, -0.02, -0.07, 0.96, 1.55, 0.99, -0.15, -3.49, 1.3]])
+    for j in range(200):
+        for i in range(100):
+            cur_matches = parse_matches()
+            if len(cur_matches) > 0:
+                for match in cur_matches:
+                    df.loc[-1] = [*match]
+                    df.index = df.index + 1
+                    df = df.sort_index()
+        print('соточка прошла')
+        df.to_csv('matches.csv')
 
     print(df)
+    '''
