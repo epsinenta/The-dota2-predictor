@@ -1,25 +1,25 @@
 from bs4 import BeautifulSoup
 from zenrows import ZenRowsClient
-import requests
+from datetime import datetime
 import os
+
 
 from constants import CLIENT_API, PARAMS
 from methods import save_to_pickle_file, read_pickle_file
-
+from classes.parse_manager import ParseManager
 client = ZenRowsClient(CLIENT_API)
 params = PARAMS
-
+PARSE_MANAGER = ParseManager()
 
 def update_heroes_list():
     url = 'https://www.dotabuff.com/heroes'
-    response = client.get(url, params=params)
-    soup = BeautifulSoup(response.text, "html.parser")
+    date = str(datetime.now().date())
+    soup = PARSE_MANAGER.parse(url, date)
     heroes_list_html = soup.findAll('div', class_='name')
 
     heroes_list = []
     for hero in heroes_list_html:
         heroes_list.append(hero.text)
-
     save_to_pickle_file('statistic/heroes_list', heroes_list)
 
 
@@ -33,16 +33,16 @@ def update_heroes_win_rates():
         if hero == "Nature's Prophet":
             hero = 'natures-prophet'
         url = f'https://www.dotabuff.com/heroes/{hero.replace(" ", "-").lower()}'
+        date = str(datetime.now().date())
+        soup = PARSE_MANAGER.parse(url, date)
         hero = _hero
-        response = client.get(url, params=params)
-        soup = BeautifulSoup(response.text, "html.parser")
         if len(soup.findAll('span', class_='won')) == 0:
             hero_winrate = soup.findAll('span', class_='lost')[0].text[:-1]
         else:
             hero_winrate = soup.findAll('span', class_='won')[0].text[:-1]
         heroes_win_rate_dict[hero] = hero_winrate
-
-    save_to_pickle_file('statistic/heroes_win_rate_dict', heroes_win_rate_dict)
+    print(heroes_win_rate_dict)
+    #save_to_pickle_file('statistic/heroes_win_rate_dict', heroes_win_rate_dict)
 
 
 def update_counters():
@@ -57,9 +57,9 @@ def update_counters():
         if hero == "Nature's Prophet":
             hero = 'natures-prophet'
         url = f'https://www.dotabuff.com/heroes/{hero.replace(" ", "-").lower()}/counters'
+        date = str(datetime.now().date())
+        soup = PARSE_MANAGER.parse(url, date)
         hero = _hero
-        response = client.get(url, params=params)
-        soup = BeautifulSoup(response.text, "html.parser")
         heroes_names = soup.findAll('a', class_='link-type-hero')
         data = soup.findAll('td', class_='sorted')
         for i, hero_name in enumerate(heroes_names):
@@ -74,8 +74,8 @@ def find_pro_players():
     pro_players_id_dict = {}
     pro_players_win_rate_dict = {}
     url = f'https://www.dotabuff.com/players'
-    response = client.get(url, params=params)
-    soup = BeautifulSoup(response.text, "html.parser")
+    date = str(datetime.now().date())
+    soup = PARSE_MANAGER.parse(url, date)
     all_players = soup.findAll('a', class_='link-type-player')
     for player in all_players:
         index = -1
@@ -101,8 +101,8 @@ def find_players_win_rate():
         players_win_rate_on_heroes[pair[0]] = {}
         count_matches_players_on_heroes[pair[0]] = {}
         url = f'https://www.dotabuff.com/players/{pair[1]}/heroes'
-        response = client.get(url, params=params)
-        soup = BeautifulSoup(response.text, "html.parser")
+        date = str(datetime.now().date())
+        soup = PARSE_MANAGER.parse(url, date)
         all_statistic = soup.findAll('td')
         delta = 0
         for index in range(0, len(all_statistic), 7):
@@ -128,7 +128,8 @@ functions = [update_heroes_list,
              show_statistic]
 
 if __name__ == '__main__':
-    show_statistic()
+    update_heroes_win_rates()
+    #show_statistic()
 
     '''for i, func in enumerate(functions):
         print(i, func.__name__)
