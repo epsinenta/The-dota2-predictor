@@ -145,7 +145,47 @@ def find_pro_players():
     save_to_pickle_file('statistic/pro_players_id_dict', pro_players_id_dict)
 '''
 
+def find_patch_date():
+    patches_date_dict = {}
+    date_patches_dict = {}
+    p = ['']
+    for year in range(2021, 2010, -1):
+        p.append('/' + str(year))
 
+    for y in p:
+        url = f'https://dota2.fandom.com/wiki/Patches{y}'
+        date = str(datetime.now().date())
+        soup = PARSE_MANAGER.parse(url, date)
+        all_patches = soup.findAll('td')
+        dates = []
+        patches = []
+        for i in range(len(all_patches)):
+            if i % 3 == 0:
+                #print(all_patches[i].text)
+                arr = all_patches[i].text.replace('Dec', '12').replace('Nov', '11').replace('Oct', '10').replace('Sep',
+                                                                                                                 '09') \
+                    .replace('Aug', '08').replace('Jul', '07').replace('Jun', '06').replace('May', '05').replace('Apr',
+                                                                                                                 '04') \
+                    .replace('Mar', '03').replace('Feb', '02').replace('Jan', '01').split()
+                if len(arr) == 3:
+                    dates.append(arr[2] + arr[1] + arr[0])
+                else:
+                    dates.append(dates[-1])
+            if i % 3 == 1:
+                #print(all_patches[i].text)
+                arr = all_patches[i].text.split()
+                s = ''
+                for a in arr:
+                    if '.' in a and ('7' in a or '6' in a):
+                        s = a
+                        break
+                patches.append(s)
+        for i in range(len(patches)):
+            if patches[i]:
+                patches_date_dict[dates[i]] = patches[i]
+                date_patches_dict[patches[i]] = dates[i]
+        print(patches_date_dict)
+    print(patches_date_dict)
 
 def show_statistic():
     for file in os.listdir("statistic"):
@@ -153,10 +193,11 @@ def show_statistic():
 
 
 def main():
+    find_patch_date()
     threads = []
 
     #threads.append(threading.Thread(target=update_heroes_list))
-    threads.append(threading.Thread(target=update_heroes_win_rates))
+    #threads.append(threading.Thread(target=update_heroes_win_rates))
     #threads.append(threading.Thread(target=update_counters))
     #threads.append(threading.Thread(target=find_pro_players))
     for thread in threads:
