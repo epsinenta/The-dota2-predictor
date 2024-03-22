@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+classes/__pycache__/parse_manager.cpython-39.pyc
 *.py[cod]
 
 # C extensions
