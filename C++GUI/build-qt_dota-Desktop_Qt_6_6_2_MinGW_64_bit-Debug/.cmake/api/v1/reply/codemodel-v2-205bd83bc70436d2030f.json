@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-7c5de076c1632fb620ad.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "qt_dota",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "qt_dota::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qt_dota-Debug-bb1b397d62616aa8394c.json",
+					"name" : "qt_dota",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qt_dota_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qt_dota_autogen-Debug-6617be58cb3bf2caf635.json",
+					"name" : "qt_dota_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qt_dota_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qt_dota_autogen_timestamp_deps-Debug-e487eefc1fddef247374.json",
+					"name" : "qt_dota_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "E:/Courses/BAUMAN/sem2/PKS/practise/The-dota2-predictor/C++GUI/build-qt_dota-Desktop_Qt_6_6_2_MinGW_64_bit-Debug",
+		"source" : "E:/Courses/BAUMAN/sem2/PKS/practise/The-dota2-predictor/C++GUI/qt_dota"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
