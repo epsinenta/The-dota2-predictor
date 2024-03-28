@@ -1,27 +1,6 @@
 from bs4 import BeautifulSoup
-from zenrows import ZenRowsClient
 import requests
-import pandas as pd
-from methods import read_pickle_file
-from constants import CLIENT_API, PARAMS
-
-client = ZenRowsClient(CLIENT_API)
-params = PARAMS
-def find_all_id():
-    f = open('id', 'r')
-    a = f.readlines()[-1]
-    f.close()
-    f = open('id', 'a')
-    print(a)
-    for n in range(int(a)-1, 0, -1):
-        url = f'https://www.cybersport.ru/matches/dota-2/{n}'
-        page = requests.get(url)
-        if page.status_code == 200:
-            f.write(f'{n}\n')
-    f.close()
-
-
-
+from match_parser import MatchParser
 def get_winrate(team, player, hero):
     url = f'https://www.dotabuff.com/search?q={player.replace(" ", "+")}&commit=Search'
     response = client.get(url, params=params)
@@ -166,8 +145,7 @@ def parse_matches():
     return context
 
 if __name__ == '__main__':
-    a = read_pickle_file("statistic/pro_players_id_dict")
-    print(a)
+    m = MatchParser(413487)
     '''
     df = pd.read_csv('matches.csv')
     df.drop(df.columns[[0]], axis=1, inplace=True)
