@@ -3,7 +3,7 @@ from zenrows import ZenRowsClient
 from datetime import datetime
 import os
 from methods import save_to_pickle_file, read_pickle_file
-from classes.parse_manager import ParseManager
+from parse_manager import ParseManager
 
 client = ZenRowsClient('da29f266ebdc9c2eeb13348ea3b42657bce876f5')
 params = {"js_render": "true",
@@ -239,6 +239,17 @@ def find_all_id():
             f.write(f'{n}\n')
     f.close()
 
+def hand_parser():
+    f = open('data_for_hand_parse', 'r')
+    a = f.readlines()
+    f.close()
+    for s in a:
+        s = s[:-1]
+        s = s.split()
+        heroes_win_rate_dict = read_pickle_file(f'statistic/{s[1]}/heroes_win_rate_dict')
+        heroes_win_rate_dict[s[0]] = float(s[2])
+        save_to_pickle_file(f'statistic/{s[1]}/heroes_win_rate_dict', heroes_win_rate_dict)
+
 def show_statistic():
     for file in os.listdir("statistic"):
         print(read_pickle_file(f'statistic/{file}'))
@@ -309,7 +320,7 @@ def main():
 
 
 if __name__ == '__main__':
-    find_all_id()
+    print(read_pickle_file('statistic/count_matches_players_on_heroes'))
 
     '''for i, func in enumerate(functions):
         print(i, func.__name__)
