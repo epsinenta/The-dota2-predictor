@@ -1,0 +1,10 @@
+# ninja log v5
+5	31	0	E:/Courses/BAUMAN/sem2/PKS/practise/The-dota2-predictor/C++GUI/build-qt_dota-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs	df64ac7a5c7d3585
+32	560	7328299502399414	qt_dota_autogen/timestamp	a7cab45f4e90bc66
+32	560	7328299502399414	qt_dota_autogen/mocs_compilation.cpp	a7cab45f4e90bc66
+32	560	7328299502399414	E:/Courses/BAUMAN/sem2/PKS/practise/The-dota2-predictor/C++GUI/build-qt_dota-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/qt_dota_autogen/timestamp	a7cab45f4e90bc66
+32	560	7328299502399414	E:/Courses/BAUMAN/sem2/PKS/practise/The-dota2-predictor/C++GUI/build-qt_dota-Desktop_Qt_6_6_2_MinGW_64_bit-Debug/qt_dota_autogen/mocs_compilation.cpp	a7cab45f4e90bc66
+560	2190	7328299519181613	CMakeFiles/qt_dota.dir/qt_dota_autogen/mocs_compilation.cpp.obj	e979188ef4871c48
+563	2278	7328299520071333	CMakeFiles/qt_dota.dir/main.cpp.obj	bff980ea399ac7ae
+566	2309	7328299520381337	CMakeFiles/qt_dota.dir/mainwindow.cpp.obj	a84706330469b1c
+2309	2525	7328299522501102	qt_dota.exe	33b47813a12b282d
