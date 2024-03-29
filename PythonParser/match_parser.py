@@ -15,13 +15,14 @@ class MapParser:
         self.patch = patch
         self.players_winrate = self.get_players_winrate()
         self.players_count_on_hero = self.get_players_count_on_hero()
+        self.players_winrate_on_hero = self.get_players_winrate_on_hero()
         self.heroes_winrate = self.get_heroes_winrate()
         self.heroes_counters = self.get_heroes_counters()
         self.map = self.collect_the_map()
 
     def collect_the_map(self):
         return [self.id, self.result, self.duration, self.patch, *self.teams, *self.players, *self.heroes, *self.players_winrate,
-                *self.players_count_on_hero, *self.heroes_winrate, *self.heroes_counters]
+                *self.players_count_on_hero, *self.players_winrate_on_hero, *self.heroes_winrate, *self.heroes_counters]
 
     def get_heroes_winrate(self):
         heroes_win_rate_dict = read_pickle_file(f'statistic/{self.patch}/heroes_win_rate_dict')
@@ -48,6 +49,16 @@ class MapParser:
                 players_count.append(30)
         return players_count
 
+    def get_players_winrate_on_hero(self):
+        players_win_rate_on_heroes = read_pickle_file(f'statistic/players_win_rate_on_heroes')
+        players_winrate_on_hero = []
+        for i, player in enumerate(self.players):
+            try:
+                players_winrate_on_hero.append(players_win_rate_on_heroes[player][self.heroes[i]])
+            except:
+                players_winrate_on_hero.append(50.0)
+        return players_winrate_on_hero
+
     def get_players_winrate(self):
         pro_players_win_rate_dict = read_pickle_file(f'statistic/{self.patch}/pro_players_win_rate_dict')
         players_winrate = []
@@ -55,7 +66,7 @@ class MapParser:
             try:
                 players_winrate.append(pro_players_win_rate_dict[player])
             except:
-                players_winrate.append(50)
+                players_winrate.append(50.0)
         return players_winrate
 
 class MatchParser:
@@ -151,13 +162,13 @@ class MatchParser:
 
     def get_date(self):
         date = self.soup.findAll('div', class_='score__date')
-        return str(date)[len('[<div class="score__date"><span data-moment="LL - LT"> '):len('[<div  class="score__date"><span data-moment="LL - LT">2024-03-28')]
+        return (str(date)[len('[<div class="score__date"><span data-moment="LL - LT"> '):len('[<div  class="score__date"><span data-moment="LL - LT">2024-03-28')]).replace('-', '')
 
     def get_patch(self):
         patches_dict = read_pickle_file('statistic/date_patches_dict')
         patches_list = read_pickle_file('statistic/patches_list')
         for i, patch in enumerate(patches_list):
-            if not self.check_dates(patches_dict[patch]):
+            if self.check_dates(patches_dict[patch]):
                 return patches_list[i + 1]
         return patches_list[0]
 
