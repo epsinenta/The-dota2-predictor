@@ -1,12 +1,13 @@
-import time
 from bs4 import BeautifulSoup
 from zenrows import ZenRowsClient
 from datetime import datetime
-import threading
 import os
 from methods import save_to_pickle_file, read_pickle_file
-from classes.parse_manager import ParseManager
+from parse_manager import ParseManager
 
+client = ZenRowsClient('da29f266ebdc9c2eeb13348ea3b42657bce876f5')
+params = {"js_render": "true",
+          "antibot": "true"}
 
 PARSE_MANAGER = ParseManager()
 
@@ -25,30 +26,31 @@ def update_heroes_list(patch_number, date):
     save_to_pickle_file(f'statistic/{patch_number}/heroes_list', heroes_list)
 
 
-def update_heroes_win_rates(patch_number, date):
+def update_heroes_win_rates(patch_number, date, patch):
     print("start update_heroes_win_rates")
     heroes_list = read_pickle_file(f'statistic/{patch_number}/heroes_list')
     heroes_win_rate_dict = {}
     count = 0
     first = datetime.now()
     for hero in heroes_list:
-        hero = "Sven"
-        count += 1
-        print(hero)
-        _hero = hero
-        if hero == "Nature's Prophet":
-            hero = 'natures-prophet'
-        url = f'https://www.dotabuff.com/heroes/{hero.replace(" ", "-").lower()}'
-        soup = PARSE_MANAGER.parse(url, date)
-        print(soup)
-        hero = _hero
-        if len(soup.findAll('span', class_='won')) == 0:
-            print(soup.findAll('span', class_='lost'))
-            hero_winrate = soup.findAll('span', class_='lost')[0].text[:-1]
-        else:
-            print(soup.findAll('span', class_='won'))
-            hero_winrate = soup.findAll('span', class_='won')[0].text[:-1]
-        heroes_win_rate_dict[hero] = hero_winrate
+        try:
+            count += 1
+            print(hero)
+            _hero = hero
+            if hero == "Nature's Prophet":
+                hero = 'natures-prophet'
+            url = f'https://www.dotabuff.com/heroes/{hero.replace(" ", "-").lower()}'
+            soup = PARSE_MANAGER.parse(url, date)
+            hero = _hero
+            if len(soup.findAll('span', class_='won')) == 0:
+                hero_winrate = soup.findAll('span', class_='lost')[0].text[:-1]
+            else:
+                hero_winrate = soup.findAll('span', class_='won')[0].text[:-1]
+            heroes_win_rate_dict[hero] = hero_winrate
+        except:
+            f = open('statistic/hand_parse', 'a')
+            f.write(f'{hero} {patch}\n')
+
     print(datetime.now() - first)
     print(heroes_win_rate_dict)
     save_to_pickle_file(f'statistic/{patch_number}/heroes_win_rate_dict', heroes_win_rate_dict)
@@ -92,6 +94,39 @@ def update_counters():
 
     print(datetime.now() - first, "heroes_counters_dict")
     save_to_pickle_file(f'statistic/heroes_counters_dict', heroes_counters_dict)
+
+def get_winrate():
+    players_list = read_pickle_file('statistic/pro_players_list')
+    players_dict = read_pickle_file('statistic/pro_players_id_dict')
+    players_winrate_on_hero_dict = {}
+    players_count_on_hero_dict = {}
+    for index, p in enumerate(players_list):
+        print(p)
+        try:
+            id = players_dict[p]
+            players_winrate_on_hero_dict[p] = {}
+            players_count_on_hero_dict[p] = {}
+            url = f'https://www.dotabuff.com/{id}/heroes?metric=played'
+            response = client.get(url, params=params)
+
+            soup = BeautifulSoup(response.text, "html.parser")
+            heroes_html = soup.findAll('td', class_='cell-icon')
+            played_html = soup.findAll('td', class_='sorted')
+            for i in range(len(heroes_html)):
+                players_count_on_hero_dict[p][heroes_html[i]["data-value"]] = played_html[i]["data-value"]
+
+            url = f'https://www.dotabuff.com/{id}/heroes?metric=winning'
+            response = client.get(url, params=params)
+
+            soup = BeautifulSoup(response.text, "html.parser")
+            heroes_html = soup.findAll('td', class_='cell-icon')
+            winning_html = soup.findAll('td', class_='sorted')
+            for i in range(len(heroes_html)):
+                players_count_on_hero_dict[p][heroes_html[i]["data-value"]] = winning_html[i]["data-value"]
+        except:
+            save_to_pickle_file('statistic/players_winrate_on_hero_dict', players_winrate_on_hero_dict)
+            save_to_pickle_file('statistic/players_count_on_hero_dict', players_count_on_hero_dict)
+            print(p, index)
 
 
 def find_pro_players(patch_number, date):
@@ -192,10 +227,43 @@ def find_patch_date():
     save_to_pickle_file('statistic/patches_date_dict', patches_date_dict)
     save_to_pickle_file('statistic/date_patches_dict', date_patches_dict)
 
+def find_all_id():
+    f = open('id', 'r')
+    a = f.readlines()[-1]
+    f.close()
+    f = open('id', 'a')
+    print(a)
+    for n in range(int(a)-1, 10064373, -1):
+        url = f'https://www.cybersport.ru/matches/dota-2/{n}'
+        if PARSE_MANAGER.get_status(url) == 200:
+            f.write(f'{n}\n')
+    f.close()
+
+def hand_parser():
+    f = open('data_for_hand_parse', 'r')
+    a = f.readlines()
+    f.close()
+    for s in a:
+        s = s[:-1]
+        s = s.split()
+        heroes_win_rate_dict = read_pickle_file(f'statistic/{s[1]}/heroes_win_rate_dict')
+        heroes_win_rate_dict[s[0]] = float(s[2])
+        save_to_pickle_file(f'statistic/{s[1]}/heroes_win_rate_dict', heroes_win_rate_dict)
+
 def show_statistic():
     for file in os.listdir("statistic"):
         print(read_pickle_file(f'statistic/{file}'))
 
+def calculate_date(date, days):
+    year = int(date[:4])
+    month = int(date[4:6])
+    day = int(date[-2:])
+    day += days
+    month += day // 30
+    day = str(day % 30)
+    year += month // 12
+    month %= 12
+    return str(year) + str(month) + str(day)
 def parse_patch():
     f = open('const', 'r')
     consts = f.readlines()
@@ -209,10 +277,10 @@ def parse_patch():
         os.mkdir(f'statistic/{number}')
     except:
         pass
-
-    find_pro_players(number, patches_dict[number])
-    update_heroes_list(number, patches_dict[number])
-    update_heroes_win_rates(number, patches_dict[number])
+    date = calculate_date(patches_dict[number], 10)
+    find_pro_players(number, date)
+    update_heroes_list(number, date)
+    update_heroes_win_rates(number, date, number)
 
     '''
     threads = [threading.Thread(target=update_heroes_list, args=(number, patches_dict[number])),
@@ -245,14 +313,14 @@ def parse_patch():
 
 
 def main():
+
     while 1:
         parse_patch()
-
     # show_statistic()
 
 
 if __name__ == '__main__':
-    main()
+    print(read_pickle_file('statistic/count_matches_players_on_heroes'))
 
     '''for i, func in enumerate(functions):
         print(i, func.__name__)
