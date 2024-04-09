@@ -49,6 +49,7 @@ class ParseManager:
     def run(self, url):
         try:
             self.soup = self.simple_parse(url)
+
             self.status = 1
         except:
             try:

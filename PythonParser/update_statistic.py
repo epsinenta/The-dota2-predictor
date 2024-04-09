@@ -41,6 +41,7 @@ def update_heroes_win_rates(patch_number, date, patch):
                 hero = 'natures-prophet'
             url = f'https://www.dotabuff.com/heroes/{hero.replace(" ", "-").lower()}'
             soup = PARSE_MANAGER.parse(url, date)
+            print([soup])
             hero = _hero
             if len(soup.findAll('span', class_='won')) == 0:
                 hero_winrate = soup.findAll('span', class_='lost')[0].text[:-1]
@@ -320,7 +321,7 @@ def main():
 
 
 if __name__ == '__main__':
-    print(read_pickle_file('statistic/count_matches_players_on_heroes'))
+    main()
 
     '''for i, func in enumerate(functions):
         print(i, func.__name__)
