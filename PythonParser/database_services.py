@@ -129,23 +129,57 @@ class DataBaseManager:
                 cursor.execute(drop_table_query)
                 connection.commit()
 
+    def get_rows(self, table_name, args: dict):
+        with psycopg2.connect(dbname=self.db_name, user=self.user,
+                              password=self.password, host=self.host) as connection:
+            with connection.cursor() as cursor:
+                get_row_query = f"SELECT * FROM {table_name} WHERE "
+                for i, key in enumerate(args.keys()):
+                    if isinstance(args[key], str):
+                        get_row_query += f"{key} = '{args[key]}'"
+                    else:
+                        get_row_query += f"{key} = {args[key]}"
+                    if i != len(args) - 1:
+                        get_row_query += ' AND '
+                get_row_query += ';'
+                cursor.execute(get_row_query)
+                rows = cursor.fetchall()
+                connection.commit()
+                return rows
+
+'''
 manager = DataBaseManager('Dota')
 print(manager.print_all_tables())
-manager.create_table('players', ['player_name', 'hero_name', 'winrate', 'count_of_matches'], ['bebra', 'negr', 50.0, 50.0])
+
+manager.create_table('patches', ['patch', 'date'], ['8.00', '20241020'])
+manager.create_table('players_heroes_statistic', ['id', 'player_name', 'hero_name', 'winrate', 'count_of_matches'], [0, 'bebra', 'negr', 50.0, 50])
+manager.create_table('heroes_list', ['patch', 'hero_name', 'winrate'], ['8.00', 'negr', 50.0])
+manager.create_table('heroes_counters', ['first_hero_name', 'second_hero_name', 'counterrate'], ['8.00', 'negr', 50.0])
+manager.create_table('pro_players_list', ['patch', 'id', 'player_name', 'winrate'], ['8.00', 0, 'negr', 50.0])
+
+print(manager.print_all_tables())
+
+l = manager.print_all_tables()
+for i in l:
+    print(manager.get_struct(i[1]))
+'''
+'''
 #manager.check_table('heroes_dota_test')
 manager.add_row('players', ['hui', 'negr', 50.0, 50.0])
+manager.add_row('players', ['pidr', 'jack', 49.0, 50.0])
+manager.add_row('players', ['hui', 'jack', 50.0, 50.0])
+print(manager.get_rows('players', {'hero_name': 'jack', 'winrate': 49.0}))
 print(manager.get_full_table('players'))
 manager.clear_table('players')
 
-manager = DataBaseManager('Dota')
 print(manager.print_all_tables())
 manager.clear_table('heroes')
-manager.create_table('heroes', ['patch', 'hero_name'], ['8.00', 'negr'])
+
 #manager.check_table('heroes_dota_test')
 manager.add_row('heroes', ['8.02', 'negr'])
 print(manager.get_full_table('heroes'))
 manager.clear_table('heroes')
-
+'''
 '''
 truncate_table_query = "TRUNCATE TABLE heroes_test;"
 conn = psycopg2.connect(dbname='Dota', user='postgres',
