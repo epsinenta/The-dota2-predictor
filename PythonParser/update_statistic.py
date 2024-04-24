@@ -313,11 +313,17 @@ def parse_patch():
     f.write(s)
 
 
-def main():
+def team_roster():
+    url = "https://liquipedia.net/dota2/CDUB_Esports"
+    date = str(datetime.now().date())
+    soup = PARSE_MANAGER.parse(url, date)
+    pos = soup.findAll('td', class_='Position')
+    for p in pos:
+        print(p.text)
 
-    while 1:
-        parse_patch()
-    # show_statistic()
+def main():
+    team_roster()
+
 
 
 if __name__ == '__main__':
@@ -327,3 +333,5 @@ if __name__ == '__main__':
         print(i, func.__name__)
     n = int(input())
     functions[n]()'''
+
+

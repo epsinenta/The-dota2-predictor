@@ -1,6 +1,6 @@
 import pickle
 from database_services import DataBaseManager
-
+from constants import teams_roasters
 def save_to_pickle_file(saved_file, content):
     with open(saved_file, "wb") as file:
         pickle.dump(content, file)
@@ -49,6 +49,13 @@ def auto_convert_players_heroes_statistic():
             manager.add_row('players_heroes_statistic', [player, hero, winrates[player][hero], count[player][hero]])
     print(manager.get_full_table('players_heroes_statistic'))
 
+def auto_convert_teams_roasters():
+    manager = DataBaseManager('Dota')
+    manager.clear_table('teams_roasters')
+    for team in teams_roasters.keys():
+        manager.add_row('teams_roasters', [team, *teams_roasters[team]])
+    print(manager.get_full_table('teams_roasters'))
+
 def auto_convert_players_list_patch(patch):
     manager = DataBaseManager('Dota')
     data = read_pickle_file(f'statistic/{patch}/pro_players_win_rate_dict')
@@ -58,8 +65,10 @@ def auto_convert_players_list_patch(patch):
 
 
 if __name__ == '__main__':
-    auto_convert_patches() #patches
 
+    '''
+    auto_convert_patches() #patches
+    auto_convert_teams_roasters() # teams
     auto_convert_players_heroes_statistic() #players_heroes_statistic
 
     auto_convert_heroes_counters() #heroes_counters
@@ -77,3 +86,4 @@ if __name__ == '__main__':
 
         else:
             break
+    '''
