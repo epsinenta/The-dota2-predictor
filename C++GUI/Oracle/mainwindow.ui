@@ -2,71 +2,126 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1366</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(10, 88, 90);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <widget class="QPushButton" name="help">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>150</y>
-      <width>161</width>
-      <height>121</height>
+      <x>433</x>
+      <y>630</y>
+      <width>500</width>
+      <height>80</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 20px;            
+border: 2px solid #094065;
+font: 14pt &quot;Sans Serif Collection&quot;;</string>
     </property>
     <property name="text">
-     <string>Дед</string>
+     <string>Help with chooce hero</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QPushButton" name="PredictUSER">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>290</y>
-      <width>161</width>
-      <height>103</height>
+      <x>433</x>
+      <y>540</y>
+      <width>500</width>
+      <height>80</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>Predict pro match</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>Predict user match</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_3">
-       <property name="text">
-        <string>Help with chooce hero</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 20px;            
+border: 2px solid #094065;
+font: 14pt &quot;Sans Serif Collection&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Predict user match</string>
+    </property>
    </widget>
+   <widget class="QPushButton" name="PredictPRO">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>450</y>
+      <width>500</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 20px;            
+border: 2px solid #094065;
+font: 14pt &quot;Sans Serif Collection&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Predict pro match</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="mainimg">
+    <property name="geometry">
+     <rect>
+      <x>433</x>
+      <y>50</y>
+      <width>500</width>
+      <height>400</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>mainimg</zorder>
+   <zorder>help</zorder>
+   <zorder>PredictUSER</zorder>
+   <zorder>PredictPRO</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1366</width>
      <height>25</height>
     </rect>
    </property>

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/img"/>
+    <qresource prefix="/">
+        <file>image_oracle/772c7ffb-no-bg-HD (carve.photos).png</file>
+    </qresource>
+</RCC>
