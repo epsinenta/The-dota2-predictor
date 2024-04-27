@@ -25,6 +25,12 @@ private slots:
 
     void on_help_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_PredictPRO_clicked();
+
+    void on_PredictUSER_clicked();
+
 private:
     Ui::MainWindow *ui;
 
