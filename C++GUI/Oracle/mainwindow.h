@@ -19,9 +19,9 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_predictp_clicked();
+    // void on_predictp_clicked();
 
-    void on_predictu_clicked();
+    // void on_predictu_clicked();
 
     void on_help_clicked();
 
