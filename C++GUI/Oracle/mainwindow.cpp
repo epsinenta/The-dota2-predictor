@@ -20,31 +20,20 @@ MainWindow::~MainWindow()
 void MainWindow::on_help_clicked()
 {
     heroc = new Hero(this);
-    std::cout << 123;
     heroc->show();
     //hide();
 }
-
-
-void MainWindow::on_pushButton_clicked()
-{
-    heroc = new Hero(this);
-    heroc->show();
-}
-
 
 void MainWindow::on_PredictPRO_clicked()
 {
     pro = new predict_pro(this);
     pro->show();
-    hide();
+    //hide();
 }
-
 
 void MainWindow::on_PredictUSER_clicked()
 {
     user = new predict_user(this);
     user->show();
-    hide();
+    //hide();
 }
-

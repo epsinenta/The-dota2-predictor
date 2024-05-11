@@ -2,5 +2,11 @@
     <qresource prefix="/img"/>
     <qresource prefix="/">
         <file>image_oracle/772c7ffb-no-bg-HD (carve.photos).png</file>
+        <file>image_oracle/empire.png</file>
+        <file>image_oracle/logo.png</file>
+        <file>image_oracle/cloud9.png</file>
+        <file>image_oracle/liquid.png</file>
+        <file>image_oracle/Team_Spirit.png</file>
+        <file>image_oracle/NAVI.png</file>
     </qresource>
 </RCC>
