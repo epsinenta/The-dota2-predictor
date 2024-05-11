@@ -85,21 +85,6 @@ color: rgb(0, 0, 0);</string>
      <string>Team 1</string>
     </property>
    </item>
-   <item>
-    <property name="text">
-     <string>Spirit</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Liquid</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>NAVI</string>
-    </property>
-   </item>
   </widget>
   <widget class="QComboBox" name="comboBox1_2">
    <property name="geometry">
@@ -115,36 +100,21 @@ color: rgb(0, 0, 0);</string>
      <string>Team 2</string>
     </property>
    </item>
-   <item>
-    <property name="text">
-     <string>BMSTU</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>COOLTEAM</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Oracle</string>
-    </property>
-   </item>
   </widget>
   <widget class="QPushButton" name="predict_button">
    <property name="geometry">
     <rect>
      <x>570</x>
      <y>300</y>
-     <width>221</width>
-     <height>71</height>
+     <width>200</width>
+     <height>70</height>
     </rect>
    </property>
    <property name="text">
     <string>Predict</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>80</x>

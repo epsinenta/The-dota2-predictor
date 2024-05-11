@@ -2,7 +2,6 @@
 #define PREDICT_PRO_H
 
 #include <QDialog>
-#include <QMenu>
 #include <QPushButton>
 #include <QHBoxLayout>
 namespace Ui {
@@ -27,9 +26,6 @@ private slots:
 
 private:
     Ui::predict_pro *ui;
-    QMenu *menu;
-    QPushButton *team1pro;
-    QHBoxLayout *horizon;
 };
 
 #endif // PREDICT_PRO_H
