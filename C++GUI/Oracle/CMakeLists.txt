@@ -23,7 +23,14 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Oracle
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        second.h second.cpp second.ui
+
+
+        hero.h hero.cpp hero.ui
+        predict_user.h predict_user.cpp predict_user.ui
+        predict_pro.h predict_pro.cpp predict_pro.ui
+        oracle.qrc
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Oracle APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
