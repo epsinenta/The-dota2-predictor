@@ -85,21 +85,6 @@ color: rgb(0, 0, 0);</string>
      <string>Team 1</string>
     </property>
    </item>
-   <item>
-    <property name="text">
-     <string>Spirit</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Liquid</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>NAVI</string>
-    </property>
-   </item>
   </widget>
   <widget class="QComboBox" name="comboBox1_2">
    <property name="geometry">
@@ -113,21 +98,6 @@ color: rgb(0, 0, 0);</string>
    <item>
     <property name="text">
      <string>Team 2</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>BMSTU</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>COOLTEAM</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Oracle</string>
     </property>
    </item>
   </widget>
