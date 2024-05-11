@@ -1,5 +1,6 @@
 #include "predict_pro.h"
 #include "ui_predict_pro.h"
+#include "database_manager.h"
 #include <QPixmap>
 #include <QtGui>
 predict_pro::predict_pro(QWidget *parent)
@@ -7,10 +8,25 @@ predict_pro::predict_pro(QWidget *parent)
     , ui(new Ui::predict_pro)
 {
     ui->setupUi(this);
+    DataBaseManager d("Dota");
+    std::vector<std::vector<std::string>> result = d.getFullTable("teams_roasters");
+    for(auto s : result){
+        ui->comboBox1->addItem(QString::fromStdString(s[0]));
+        ui->comboBox1_2->addItem(QString::fromStdString(s[0]));
+    }
+    std::map<std::string, std::string> m;
+    m["patch"] = "7.35c";
+    result = d.getRows("heroes_list", m);
     ui->cb1->addItem("Hero 1");
+    for(auto s : result){
+
+        ui->cb1->addItem(QIcon(QString::fromStdString(":/image_oracle/" + s[1] + "_minimap_icon.png")), QString::fromStdString(s[1]));
+
+
+    }
+
     ui->cb1->addItem(QIcon(":/image_oracle/Team_Spirit.png"), "PUDGE");
-    ui->cb1->addItem(QIcon(":/image_oracle/NAVI.png"), "ORACLE");
-    ui->cb1->addItem(QIcon(":/image_oracle/cloud9.png"), "HERO");
+
     ui->cb2->addItem("Hero 2");
     ui->cb2->addItem(QIcon(":/image_oracle/Team_Spirit.png"), "PUDGE");
     ui->cb2->addItem(QIcon(":/image_oracle/NAVI.png"), "ORACLE");

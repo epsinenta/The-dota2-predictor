@@ -12,6 +12,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+set(PostgreSQL_INCLUDE_DIR "C:/Program Files/PostgreSQL/16/include")
+set(PostgreSQL_LIBRARY_DIR "C:/Program Files/PostgreSQL/16/lib")
+set(PostgreSQL_BIN_DIR "C:/Program Files/PostgreSQL/16/bin")
+
+include_directories(${PostgreSQL_INCLUDE_DIR})
+link_directories(${PostgreSQL_LIBRARY_DIR})
+
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
@@ -29,6 +36,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         predict_user.h predict_user.cpp predict_user.ui
         predict_pro.h predict_pro.cpp predict_pro.ui
         oracle.qrc
+        config
+        database_manager.h database_manager.cpp
+        text_file_reader.h text_file_reader.cpp
 
 
     )
@@ -50,7 +60,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(Oracle PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Oracle PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${PQ_LIB} "${PQXX_LIBRARIES}")
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -76,3 +86,6 @@ install(TARGETS Oracle
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(Oracle)
 endif()
+
+find_library(PQ_LIB pq PATHS ${PostgreSQL_LIBRARY_DIR} NO_DEFAULT_PATH)
+

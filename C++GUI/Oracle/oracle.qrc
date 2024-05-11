@@ -8,5 +8,7 @@
         <file>image_oracle/liquid.png</file>
         <file>image_oracle/Team_Spirit.png</file>
         <file>image_oracle/NAVI.png</file>
+        <file>image_oracle/Abaddon_minimap_icon.webp</file>
+        <file>image_oracle/Abaddon_minimap_icon.png</file>
     </qresource>
 </RCC>
