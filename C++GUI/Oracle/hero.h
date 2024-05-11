@@ -15,6 +15,10 @@ public:
     explicit Hero(QWidget *parent = nullptr);
     ~Hero();
 
+private slots:
+
+    void on_Select_hero_clicked();
+
 private:
     Ui::Hero *ui;
 };

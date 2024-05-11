@@ -136,15 +136,15 @@ color: rgb(0, 0, 0);</string>
     <rect>
      <x>570</x>
      <y>300</y>
-     <width>221</width>
-     <height>71</height>
+     <width>200</width>
+     <height>70</height>
     </rect>
    </property>
    <property name="text">
     <string>Predict</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>80</x>
