@@ -64,7 +64,20 @@ void predict_pro::on_comboBox1_activated(int index)
         ui->imgT1->setStyleSheet("image: url(:/image_oracle/NAVI.png)");
         ui->comboBox1->currentIndex();
     }
-
+    ui->cb1->addItem("Hero 1");
+    ui->cb1->addItem(QIcon(":/image_oracle/Team_Spirit.png"), "PUDGE");
+    ui->cb1->addItem(QIcon(":/image_oracle/NAVI.png"), "ORACLE");
+    ui->cb1->addItem(QIcon(":/image_oracle/cloud9.png"), "HERO");
+    ui->cb2->addItem("Hero 2");
+    ui->cb2->addItem(QIcon(":/image_oracle/Team_Spirit.png"), "PUDGE");
+    ui->cb2->addItem(QIcon(":/image_oracle/NAVI.png"), "ORACLE");
+    ui->cb2->addItem(QIcon(":/image_oracle/cloud9.png"), "HERO");
+    ui->cb3->addItem("Hero 3");
+    ui->cb3->addItem(QIcon(":/image_oracle/Team_Spirit.png"), "PUDGE");
+    ui->cb3->addItem(QIcon(":/image_oracle/NAVI.png"), "ORACLE");
+    ui->cb3->addItem(QIcon(":/image_oracle/cloud9.png"), "HERO");
+    ui->cb4->addItem("Hero 4");
+    ui->cb5->addItem("Hero 5");
 }
 
 
@@ -82,6 +95,11 @@ void predict_pro::on_comboBox1_2_activated(int index)
         ui->imgT2->setStyleSheet("image: url(:/image_oracle/empire.png)");
         ui->comboBox1->currentIndex();
     }
+    ui->cb1_2->addItem("Hero 1");
+    ui->cb2_2->addItem("Hero 2");
+    ui->cb3_2->addItem("Hero 3");
+    ui->cb4_2->addItem("Hero 4");
+    ui->cb5_2->addItem("Hero 5");
 }
 
 

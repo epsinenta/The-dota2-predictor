@@ -8,7 +8,16 @@
         <file>image_oracle/liquid.png</file>
         <file>image_oracle/Team_Spirit.png</file>
         <file>image_oracle/NAVI.png</file>
+<<<<<<< HEAD
         <file>image_oracle/Abaddon_minimap_icon.webp</file>
         <file>image_oracle/Abaddon_minimap_icon.png</file>
+=======
+        <file>image_oracle/dota_teams.jpg</file>
+        <file>image_oracle/gyrocopter.jpg</file>
+        <file>image_oracle/chel.jpg</file>
+        <file>image_oracle/chel2.jpg</file>
+        <file>image_oracle/chel3.jpg</file>
+        <file>image_oracle/chel4.jpg</file>
+>>>>>>> 9c484d5af1a303f099a5c0c487c4ba612744ba50
     </qresource>
 </RCC>
