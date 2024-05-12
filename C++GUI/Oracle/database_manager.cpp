@@ -56,7 +56,6 @@ std::vector<std::vector<std::string>> DataBaseManager::getRows(std::string table
     }
 
     request += ";";
-    std::cout << request << '\n';
     PGresult *res = PQexec(conn, request.c_str());
 
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
@@ -99,7 +98,6 @@ std::vector<std::vector<std::string>> DataBaseManager::getFullTable(std::string 
 
     std::string request = "SELECT * FROM " + table_name;
 
-    std::cout << request << '\n';
     PGresult *res = PQexec(conn, request.c_str());
 
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {

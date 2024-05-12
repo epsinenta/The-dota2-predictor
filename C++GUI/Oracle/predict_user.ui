@@ -57,19 +57,19 @@ color: rgb(0, 0, 0);</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="1" column="0">
-     <widget class="QComboBox" name="cb3"/>
+     <widget class="QComboBox" name="team1_hero3_select_menu"/>
     </item>
     <item row="1" column="1">
-     <widget class="QComboBox" name="cb4"/>
+     <widget class="QComboBox" name="team1_hero4_select_menu"/>
     </item>
     <item row="2" column="0">
-     <widget class="QComboBox" name="cb5"/>
+     <widget class="QComboBox" name="team1_hero5_select_menu"/>
     </item>
     <item row="0" column="1">
-     <widget class="QComboBox" name="cb2"/>
+     <widget class="QComboBox" name="team1_hero2_select_menu"/>
     </item>
     <item row="0" column="0">
-     <widget class="QComboBox" name="cb1"/>
+     <widget class="QComboBox" name="team1_hero1_select_menu"/>
     </item>
    </layout>
   </widget>
@@ -84,19 +84,19 @@ color: rgb(0, 0, 0);</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="1">
-     <widget class="QComboBox" name="cb2_2"/>
+     <widget class="QComboBox" name="team2_hero2_select_menu"/>
     </item>
     <item row="1" column="1">
-     <widget class="QComboBox" name="cb4_2"/>
+     <widget class="QComboBox" name="team2_hero4_select_menu"/>
     </item>
     <item row="1" column="0">
-     <widget class="QComboBox" name="cb3_2"/>
+     <widget class="QComboBox" name="team2_hero3_select_menu"/>
     </item>
     <item row="0" column="0">
-     <widget class="QComboBox" name="cb1_2"/>
+     <widget class="QComboBox" name="team2_hero1_select_menu"/>
     </item>
     <item row="2" column="1">
-     <widget class="QComboBox" name="cb5_2"/>
+     <widget class="QComboBox" name="team2_hero5_select_menu"/>
     </item>
    </layout>
   </widget>

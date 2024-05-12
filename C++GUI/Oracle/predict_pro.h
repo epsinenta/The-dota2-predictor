@@ -18,11 +18,11 @@ public:
 
 private slots:
 
-    void on_comboBox1_activated(int index);
-
-    void on_comboBox1_2_activated(int index);
-
     void on_predict_button_clicked();
+
+    void on_team2_select_menu_activated(int index);
+
+    void on_team1_select_menu_activated(int index);
 
 private:
     Ui::predict_pro *ui;
