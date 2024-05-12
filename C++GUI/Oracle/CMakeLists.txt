@@ -39,6 +39,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         config
         database_manager.h database_manager.cpp
         text_file_reader.h text_file_reader.cpp
+        widget_initializer.h widget_initializer.cpp
 
 
     )
