@@ -1,5 +1,5 @@
 #include "database_manager.h"
-#include "text_file_reader.h"
+#include "text_file_manager.h"
 
 DataBaseManager::DataBaseManager()
 {
@@ -13,7 +13,7 @@ DataBaseManager::DataBaseManager(std::string _database_name) : DataBaseManager::
 
 void DataBaseManager::readParams()
 {
-    //std::vector<std::string> params = TextFileReader().read("./config.txt");
+    std::vector<std::string> params = TextFileManager().read("./config.txt");
     user = "postgres";
     password = "1q2ws3edc4r";
     host = "127.0.0.1";

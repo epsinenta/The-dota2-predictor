@@ -11,7 +11,7 @@ void WidgetInitializer::initHeroesMenu(std::vector<QComboBox*>& heroes_menu)
     result = d.getRows("heroes_list", args);
     for(int i = 0; i < 10; i++)
     {
-        heroes_menu[i]->addItem(QString::fromStdString("Hero " + std::to_string((i + 1) % 5)));
+        heroes_menu[i]->addItem(QString::fromStdString("Hero " + std::to_string((i % 5) + 1)));
     }
     for(auto s : result){
         std::string start_s = s[1];

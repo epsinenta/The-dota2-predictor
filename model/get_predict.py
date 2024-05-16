@@ -1,7 +1,7 @@
 # Standard python libraries
+import warnings
 import os
-import requests
-
+warnings.filterwarnings('ignore')
 # Essential DS libraries
 import numpy as np
 import pandas as pd
@@ -25,14 +25,16 @@ TIMEOUT = 300
 TARGET_NAME = '1'
 
 def main():
+    
     np.random.seed(RANDOM_STATE)
     torch.set_num_threads(N_THREADS)
     
-    with open("model/model.pkl", "rb") as file:
+    with open("../../model/model.pkl", "rb") as file:
         model = pickle.load(file)
     
-    with open("model/row.txt", "r") as file:
+    with open("row.txt", "r") as file:
         data = file.readline().strip()
+    
     
     df = pd.read_csv(io.StringIO(data), header=None)
     
@@ -45,9 +47,8 @@ def main():
        '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84', '85',
        '86', '87', '88', '89', '90'],
       dtype='object')
-    print(data)
     result = model.predict(df)        
-    print(result)
+    print(result[0])
 
-
-main()
+if __name__ == '__main__':
+    main()

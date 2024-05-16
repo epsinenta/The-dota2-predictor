@@ -36,11 +36,14 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         predict_user.h predict_user.cpp predict_user.ui
         predict_pro.h predict_pro.cpp predict_pro.ui
         oracle.qrc
-        config
-        database_manager.h database_manager.cpp
-        text_file_reader.h text_file_reader.cpp
-        widget_initializer.h widget_initializer.cpp
 
+        database_manager.h database_manager.cpp
+
+        widget_initializer.h widget_initializer.cpp
+        row.txt
+        config.txt
+        predictmanager.h predictmanager.cpp
+        text_file_manager.h text_file_manager.cpp
 
     )
 # Define target properties for Android with Qt 6 as:
@@ -90,3 +93,7 @@ endif()
 
 find_library(PQ_LIB pq PATHS ${PostgreSQL_LIBRARY_DIR} NO_DEFAULT_PATH)
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/row.txt
+        ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.txt
+        ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
