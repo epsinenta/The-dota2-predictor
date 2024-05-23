@@ -1,3 +1,5 @@
+# Oracle
+![Oracle Image](/C++GUI/Oracle/image_oracle/oracle.png)
 ### Описание
 
 Наш проект представляет собой уникальную систему для предсказания
