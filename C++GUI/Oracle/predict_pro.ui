@@ -6,204 +6,574 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1366</width>
-    <height>768</height>
+    <width>970</width>
+    <height>644</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <widget class="QLabel" name="label_pro">
-   <property name="geometry">
-    <rect>
-     <x>580</x>
-     <y>60</y>
-     <width>221</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 22pt &quot;Sans Serif Collection&quot;;
-color: rgb(0, 0, 0);</string>
-   </property>
-   <property name="text">
-    <string>PRO</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="imgT1">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>160</y>
-     <width>281</width>
-     <height>201</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="imgT2">
-   <property name="geometry">
-    <rect>
-     <x>960</x>
-     <y>180</y>
-     <width>291</width>
-     <height>201</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="team1_select_menu">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>70</y>
-     <width>250</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>Team 1</string>
-    </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="9">
+    <spacer name="horizontalSpacer_5">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>130</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
-  </widget>
-  <widget class="QComboBox" name="team2_select_menu">
-   <property name="geometry">
-    <rect>
-     <x>1000</x>
-     <y>80</y>
-     <width>250</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>Team 2</string>
-    </property>
+   <item row="32" column="11">
+    <widget class="QComboBox" name="team2_hero5_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 5px;       
+border: 2px solid #094065;
+font: 8pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+    </widget>
    </item>
-  </widget>
-  <widget class="QPushButton" name="predict_button">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>300</y>
-     <width>200</width>
-     <height>70</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Predict</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>450</y>
-     <width>289</width>
-     <height>211</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
-     <widget class="QComboBox" name="team1_hero2_select_menu"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QComboBox" name="team1_hero4_select_menu"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QComboBox" name="team1_hero3_select_menu"/>
-    </item>
-    <item row="0" column="0">
-     <widget class="QComboBox" name="team1_hero1_select_menu"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QComboBox" name="team1_hero5_select_menu"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>970</x>
-     <y>440</y>
-     <width>289</width>
-     <height>211</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="1">
-     <widget class="QComboBox" name="team2_hero2_select_menu"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QComboBox" name="team2_hero4_select_menu"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QComboBox" name="team2_hero3_select_menu"/>
-    </item>
-    <item row="0" column="0">
-     <widget class="QComboBox" name="team2_hero1_select_menu"/>
-    </item>
-    <item row="2" column="1">
-     <widget class="QComboBox" name="team2_hero5_select_menu"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QLabel" name="predict_team">
-   <property name="geometry">
-    <rect>
-     <x>510</x>
-     <y>420</y>
-     <width>301</width>
-     <height>211</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="winner_label">
-   <property name="geometry">
-    <rect>
-     <x>460</x>
-     <y>660</y>
-     <width>411</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 900 28pt &quot;Segoe UI Black&quot;;
+   <item row="20" column="11">
+    <widget class="QComboBox" name="team2_hero4_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 5px;       
+border: 2px solid #094065;
+font: 8pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="27" column="6">
+    <widget class="QLabel" name="winner_label">
+     <property name="styleSheet">
+      <string notr="true">font: 900 28pt &quot;Segoe UI Black&quot;;
 color: rgb(0, 0, 0);</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="imgT1">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>140</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>140</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="32" column="1">
+    <widget class="QComboBox" name="team1_hero5_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 5px;       
+border: 2px solid #094065;
+font: 8pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="4">
+    <widget class="QComboBox" name="team1_hero2_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 5px;       
+border: 2px solid #094065;
+font: 8pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="9">
+    <widget class="QComboBox" name="team2_hero1_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 5px;       
+border: 2px solid #094065;
+font: 8pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="6">
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>100</width>
+       <height>150</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="27" column="4">
+    <widget class="QComboBox" name="team1_hero4_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 5px;       
+border: 2px solid #094065;
+font: 8pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="27" column="9">
+    <widget class="QComboBox" name="team2_hero3_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 5px;       
+border: 2px solid #094065;
+font: 8pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="11">
+    <widget class="QLabel" name="imgT2">
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>140</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>140</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="22" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>10</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="20" column="1">
+    <widget class="QComboBox" name="team1_hero1_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 5px;       
+border: 2px solid #094065;
+font: 8pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="27" column="11">
+    <widget class="QComboBox" name="team2_hero2_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 5px;       
+border: 2px solid #094065;
+font: 8pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="7">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="team1_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>35</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>170</width>
+       <height>35</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border: 2px solid #094065;
+font: 14pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Team 1</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="6">
+    <widget class="QLabel" name="label_pro">
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 900 18pt &quot;Segoe UI&quot;;
+color: rgb(0, 0, 0);</string>
+     </property>
+     <property name="text">
+      <string>PRO MATCH</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4">
+    <spacer name="horizontalSpacer_4">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>130</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="11">
+    <widget class="QComboBox" name="team2_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>35</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>170</width>
+       <height>35</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border: 2px solid #094065;
+font: 14pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Team 2</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="34" column="6">
+    <widget class="QLabel" name="predict_team">
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="31" column="1">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="20" column="10">
+    <spacer name="horizontalSpacer_6">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>30</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="20" column="5">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="27" column="1">
+    <widget class="QComboBox" name="team1_hero3_select_menu">
+     <property name="minimumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 5px;       
+border: 2px solid #094065;
+font: 8pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="20" column="6">
+    <widget class="QPushButton" name="predict_button">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>200</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);
+border-radius: 20px;            
+border: 2px solid #094065;
+font: 14pt &quot;Sans Serif Collection&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Predict</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

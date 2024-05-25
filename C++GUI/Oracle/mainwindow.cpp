@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QPixmap pix(":/image_oracle/772c7ffb-no-bg-HD (carve.photos).png");
+    QPixmap pix(":/image_oracle/Oracle.png");
     int w = ui->mainimg->width();
     int h = ui->mainimg->height();
     ui->mainimg->setPixmap(pix.scaled(w,h,Qt::KeepAspectRatio));
