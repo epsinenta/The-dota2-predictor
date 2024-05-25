@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/img"/>
     <qresource prefix="/">
-        <file>image_oracle/772c7ffb-no-bg-HD (carve.photos).png</file>
         <file>image_oracle/empire.png</file>
         <file>image_oracle/logo.png</file>
         <file>image_oracle/cloud9.png</file>
@@ -169,5 +168,6 @@
         <file>image_oracle/teams/x5_Gaming.png</file>
         <file>image_oracle/teams/Xtreme_Gaming.png</file>
         <file>image_oracle/teams/Azure_Ray.png</file>
+        <file>image_oracle/Oracle.png</file>
     </qresource>
 </RCC>

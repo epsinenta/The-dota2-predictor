@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include "predictmanager.h"
 #include <iostream>
+#include <QScreen>
 predict_pro::predict_pro(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::predict_pro)
@@ -16,6 +17,12 @@ predict_pro::predict_pro(QWidget *parent)
     WidgetInitializer().initTeamsMenu(teams_menu);
     std::vector<QComboBox*> heroes_menu = {ui->team1_hero1_select_menu, ui->team1_hero2_select_menu, ui->team1_hero3_select_menu, ui->team1_hero4_select_menu, ui->team1_hero5_select_menu, ui->team2_hero1_select_menu, ui->team2_hero2_select_menu, ui->team2_hero3_select_menu, ui->team2_hero4_select_menu, ui->team2_hero5_select_menu};
     WidgetInitializer().initHeroesMenu(heroes_menu);
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect screenGeometry = screen->geometry();
+
+    int newWidth = screenGeometry.width()*0.7;
+    int newHeight = screenGeometry.height()*0.7;
+    resize(newWidth, newHeight);
 }
 
 predict_pro::~predict_pro()

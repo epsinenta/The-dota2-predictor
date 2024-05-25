@@ -19,6 +19,8 @@ private slots:
 
     void on_Select_hero_clicked();
 
+    void on_label_hero_1_objectNameChanged(const QString &objectName);
+
 private:
     Ui::Hero *ui;
 };
