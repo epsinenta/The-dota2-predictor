@@ -37,7 +37,7 @@ border: 2px solid #094065;
 font: 14pt &quot;Sans Serif Collection&quot;;</string>
       </property>
       <property name="text">
-       <string>Help with chooce hero</string>
+       <string>Help with choice hero</string>
       </property>
      </widget>
     </item>
@@ -155,7 +155,7 @@ font: 14pt &quot;Sans Serif Collection&quot;;</string>
      <x>0</x>
      <y>0</y>
      <width>957</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

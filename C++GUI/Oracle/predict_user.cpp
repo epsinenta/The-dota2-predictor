@@ -34,11 +34,11 @@ void predict_user::on_PredictButton_clicked()
     for(auto hero_menu : heroes_menu)
         heroes.push_back(hero_menu->currentText().toStdString());
     double chance = PredictManager().getWinTeam(teams, heroes);
-    std::string str_chance = "Left team win with chance:\n";
+    std::string str_chance = "Radiant win\n";
     chance *= 100;
     if(chance < 50)
     {
-        str_chance = "Right team win with chance:\n";
+        str_chance = "Dire win\n";
         chance = 100 - chance;
     }
 
