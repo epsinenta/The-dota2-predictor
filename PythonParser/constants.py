@@ -1,2 +1,34 @@
-CLIENT_API = '55b20866e1939d82af622565306a8b05c55138bd'
-PARAMS = {"js_render":"true","antibot":"true"}
+user = 'postgres'
+password = '1q2ws3edc4r'
+host = 'localhost'
+teams_roasters = {'nouns': ['Yuma', 'Copy', 'Gunnar', 'Lelis', 'Fly'],
+                  'Shopify Rebellion': ['Arteezy', 'Yopaj-', 'SabeRLight-', 'Thiolicor', 'Kitrak'],
+                  'BOOM': ['Pakazs', 'SLATEM$', 'Sacred', 'n1ght', 'Panda'],
+                  'HEROIC': ['K1', '4nalog', 'Davai Lama', 'Scofield', 'KJ'],
+                  'Infinity': ['Mnz', 'PiPi', 'Ryu', 'Michael-', 'Yadomi'],
+                  'Lava Esports': ['Lumière', 'James', 'Frank', 'Genek', 'Gardick'],
+                  'Midas Club': ['Costabile', '4dr', 'fcr', 'hyko', 'wij'],
+                  'Pacific Esports': ['focco', 'rocent', 'Mingatte', 'jpc', 'Nanako-'],
+                  'Qhali': ['DaaD-', 'kxy', 'Adrian', 'pamplona', '555'],
+                  'x5 Gaming': ['mini', 'SebaS', 'Hermit', 'Jupiter', 'nuages'],
+                  'Entity': ['watson', 'No[o]ne-', 'DM', 'Kataomi`', 'Fishman'],
+                  'Gaimin Gladiators': ['dyrachyo', 'Quinn', 'Ace', 'tOfu', 'Seleri'],
+                  'Team Liquid': ['miCKe', 'Nisha', '33', 'Boxi', 'Insania'],
+                  'Team Secret': ['Crystallis', 'Kordan', 'BOOM', 'ah fu', 'Puppey'],
+                  '1win': ['Munkushi~', 'CHIRA_JUNIOR', 'Cloud', 'swedenstrong', 'RESPECT'],
+                  'BetBoom Team': ['Nightfall', 'gpk', 'MieRo`', 'Save-', 'TORONTOTOKYO'],
+                  'L1GA TEAM': ['RAMZES666', 'reibl', 'bb3px', 'Onejey', 'pantomem'],
+                  'Natus Vincere': ['Yuragi', 'sanctity-', 'nefrit', 'Zayac', 'Malady'],
+                  'SIBE Team': ['selfhate', 'ряф^^', 'zenica', 'sunset‷', 'sohy'],
+                  'Virtus.pro': ['Kiritych', 'squad1x', 'Noticed', 'sayuw', 'Fng'],
+                  'Team Spirit': ['Yatoro', 'Larl', 'Collapse', 'Mira', 'Miposhka'],
+                  'Azure Ray': ['Lou', 'Ori', 'Faith_bian', 'fy', '天命'],
+                  'G2 x iG': ['Monet', 'NothingToSay', 'JT-', 'BoBoKa', 'xNova'],
+                  'LGD Gaming': ['shiro', 'Setsu', 'niu', 'Pyw', 'y`'],
+                  'Team Bright': ['Ulu', 'Xwy', 'Irving', 'TK', 'Redpanda'],
+                  'Team Zero': ['Erika', '7e', 'Beyond', 'ponlo', 'zzq'],
+                  'Xtreme Gaming': ['Ame', 'Xm', 'Xxs', 'XinQ', 'Dy'],
+                  'Execration': ['Abat', 'lewis', 'Tino', 'Shanks', 'cml'],
+                  'Talon Esports': ['Akashi', 'ChYuaN', 'Ws', 'Jhocam', 'ponyo'],
+                  }
+

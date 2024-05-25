@@ -1,179 +1,37 @@
-from bs4 import BeautifulSoup
-from zenrows import ZenRowsClient
-import requests
 import pandas as pd
-from methods import read_pickle_file
-from constants import CLIENT_API, PARAMS
-
-client = ZenRowsClient(CLIENT_API)
-params = PARAMS
-def find_all_id():
-    f = open('id', 'r')
-    a = f.readlines()[-1]
-    f.close()
-    f = open('id', 'a')
-    print(a)
-    for n in range(int(a)-1, 0, -1):
-        url = f'https://www.cybersport.ru/matches/dota-2/{n}'
-        page = requests.get(url)
-        if page.status_code == 200:
-            f.write(f'{n}\n')
-    f.close()
-
-
-
-def get_winrate(team, player, hero):
-    url = f'https://www.dotabuff.com/search?q={player.replace(" ", "+")}&commit=Search'
-    response = client.get(url, params=params)
-
-    soup = BeautifulSoup(response.text, "html.parser")
-    players_html = soup.findAll('div', class_='inner')
-
-    url = f'https://www.dotabuff.com/{players_html[0]["data-link-to"]}/heroes?metric=played'
-    response = client.get(url, params=params)
-
-    soup = BeautifulSoup(response.text, "html.parser")
-    heroes_html = soup.findAll('td', class_='cell-icon')
-    played_html = soup.findAll('td', class_='sorted')
-    played = 0
-    for i in range(len(heroes_html)):
-        if heroes_html[i]["data-value"] == hero:
-            played = played_html[i]["data-value"]
-
-
-    url = f'https://www.dotabuff.com/{players_html[0]["data-link-to"]}/heroes?metric=winning'
-    response = client.get(url, params=params)
-
-    soup = BeautifulSoup(response.text, "html.parser")
-    heroes_html = soup.findAll('td', class_='cell-icon')
-    winning_html = soup.findAll('td', class_='sorted')
-    winrate = 0
-    for i in range(len(heroes_html)):
-        if heroes_html[i]["data-value"] == hero:
-            winrate = winning_html[i]["data-value"]
-
-    return [played, winrate]
-
-def parse_match(id):
-    url = f'https://ru.dltv.org/matches/{id}'
-    page = requests.get(url)
-    soup = BeautifulSoup(page.text, "html.parser")
-    score_html = soup.findAll('div', class_='score__scores')
-    try:
-        count = int(score_html[0].text.replace(' ', '').replace('\n', '')[0]) + \
-                int(score_html[0].text.replace(' ', '').replace('\n', '')[2])
-    except:
-        count = 0
-    teams_html = soup.findAll('a', class_='team__stats-name')
-    teams = []
-    for team in teams_html:
-        teams.append(team.text)
-
-    score_board_html = soup.findAll('div', class_='scoreboard')
-    all_teams = []
-    swap_teams = [teams[1], teams[0]]
-    score = []
-    for score_board in score_board_html:
-        score.append(int(not bool(str(score_board).index('Match ID') < str(score_board).index('<div class="winner">win</div>'))))
-        if str(score_board).index('Силы тьмы') < str(score_board).index('Силы света'):
-            all_teams.append(swap_teams)
-        else:
-            all_teams.append(teams)
-
-    for i in range(count):
-        if teams != all_teams[i]:
-            score[i] = (score[i] + 1) % 2
-
-
-    players_html = soup.findAll('div', class_='cell__name')[:count * 10]
-    players = []
-    for i in range(count):
-        cur = []
-        for j in range(10):
-            player = players_html[i * 10 + j]
-            cur.append(player.text)
-        players.append(cur)
-
-    heroes_html = soup.findAll('div', class_='pick pick-sm')
-    heroes = []
-    for i in range(count):
-        cur = []
-        for j in range(10):
-            hero = heroes_html[i * 10 + j]
-            s = str(hero)[len('<div class="pick pick-sm" data-tippy-content="'):]
-            s = s[:s.index('"')]
-            cur.append(s)
-        heroes.append(cur)
-
-    heroes_win_rate_dict = read_pickle_file('statistic/heroes_win_rate_dict')
-    heroes_winrates = []
-    for i in range(count):
-        cur = []
-        for j in range(10):
-            hero = heroes[i][j]
-            if hero == "Nature's Prophet":
-                hero = 'natures-prophet'
-            cur.append(heroes_win_rate_dict[hero])
-        heroes_winrates.append(cur)
-
-    heroes_counters_dict = read_pickle_file('statistic/heroes_counters_dict')
-    heroes_counters = []
-    for i in range(count):
-        cur = []
-        for j in range(5):
-            for k in range(5, 10):
-                hero1 = heroes[i][j]
-                hero2 = heroes[i][k]
-                cur.append(heroes_counters_dict[hero1][hero2])
-        heroes_counters.append(cur)
-    '''
-    players_on_heroes = []
-    for i in range(count):
-        cur = []
-        for j in range(10):
-            cur.append(players[i * 10 + j] + " on " + heroes[i * 10 + j])
-        players_on_heroes.append(cur)
-    '''
-    '''
-    winrates = []
-    for i in range(count):
-        cur = []
-        for j in range(10):
-            if j < 5:
-                cur_team = all_teams[i][0]
-            else:
-                cur_team = all_teams[i][1]
-            cur.append(get_winrate(cur_team, players[i * 10 + j], heroes[i * 10 + j]))
-        winrates.append(cur)
-    '''
-    winrates = [[50.0] * 10] * count
-    result = []
-    for i in range(count):
-        result.append([score[i], *all_teams[i], *players[i], *winrates[i], *heroes_winrates[i], *heroes_counters[i]])
-    print(id, 123)
-    return result
-
+from match_parser import MatchParser
 
 def parse_matches():
-    last_match = int(open('const', 'r').readlines()[0])
+    f = open('const', 'r')
+    arr = f.readlines()
+    f.close()
+    last_match = int(arr[0][:-1])
     print(last_match)
     try:
-        context = parse_match(last_match)
+        context = MatchParser(last_match).get_result()
     except:
         context = []
     last_match -= 1
-    open('const', 'w').write(str(last_match))
+    arr[0] = str(last_match) + '\n'
+    res_str = ''
+    for a in arr:
+        res_str += a
+    f = open('const', 'w')
+    f.write(res_str)
+    f.close()
     return context
 
 if __name__ == '__main__':
-    a = read_pickle_file("statistic/pro_players_id_dict")
-    print(a)
-    '''
+    print(MatchParser(413487).get_result())
+    #df = pd.DataFrame([['413487.0', 0, 3968, '7.35b', 'Azure Ray', 'G2.iG', 'Faith_bian', '天命', 'fy', 'Ori', 'Lou', 'Monet', 'BoBoKa', 'NothingToSay', 'xNova', 'JT-', 'Timbersaw', 'Elder Titan', 'Shadow Shaman', 'Zeus', 'Clinkz', 'Luna', 'Lion', 'Razor', 'Disruptor', 'Magnus', 50.0, '52.842556', '58.38978', '55.028183', '53.42043', '54.84208', 50.0, 50.0, 50.0, '52.712887', 30, '77', '68', 30, '92', '62', 30, 30, 30, 30, 50.0, '57.14286', '61.764706', 50.0, '58.69565', '53.22581', 50.0, 50.0, 50.0, 50.0, '51.10', '48.94', '52.41', '51.38', '52.54', '49.73', '47.65', '49.14', '49.61', '47.72', 0.43, 0.54, 0.52, 0.95, 1.03, -0.2, 1.31, -1.82, -2.0, -0.02, 1.25, 0.55, 1.59, 0.26, 0.07, -1.61, 0.61, 0.31, 0.56, 0.98, 0.36, 0.98, 1.45, -0.76, -0.06], ['413487.1', 0, 2636, '7.35b', 'Azure Ray', 'G2.iG', 'Faith_bian', '天命', 'fy', 'Ori', 'Lou', 'Monet', 'BoBoKa', 'xNova', 'NothingToSay', 'JT-', 'Timbersaw', 'Shadow Demon', 'Shadow Shaman', 'Templar Assassin', 'Alchemist', 'Luna', 'Lion', 'Enchantress', 'Zeus', 'Doom', 50.0, '52.842556', '58.38978', '55.028183', '53.42043', '54.84208', 50.0, 50.0, 50.0, '52.712887', 30, '53', '68', 30, '83', '62', 30, 30, 30, 30, 50.0, '56.60377', '61.764706', 50.0, '54.21687', '53.22581', 50.0, 50.0, 50.0, 50.0, '51.10', '46.61', '52.41', '43.84', '46.43', '49.73', '47.65', '45.82', '51.38', '47.93', 0.43, 0.54, 1.14, -1.09, 1.45, -2.05, -0.24, 0.85, -1.51, 1.1, 1.25, 0.55, 2.35, -0.28, 1.27, 0.69, -0.8, 0.59, -2.16, 1.2, 0.33, -0.23, 0.55, -1.31, 0.88], ['413487.2', 1, 3188, '7.35b', 'Azure Ray', 'G2.iG', 'fy', '天命', 'Ori', 'Lou', 'Faith_bian', 'NothingToSay', 'xNova', 'Monet', 'BoBoKa', 'JT-', 'Gyrocopter', 'Clockwerk', 'Death Prophet', 'Naga Siren', 'Omniknight', 'Primal Beast', 'Shadow Shaman', 'Terrorblade', 'Mirana', 'Doom', '58.38978', '52.842556', '55.028183', '53.42043', 50.0, 50.0, 50.0, '54.84208', 50.0, '52.712887', '42', '101', 30, '208', 30, 30, 30, '199', 30, 30, '40.476192', '57.425743', 50.0, '58.173077', 50.0, 50.0, 50.0, '65.32663', 50.0, 50.0, '47.33', '49.16', '53.95', '48.54', '47.14', '47.92', '52.41', '49.42', '47.84', '47.93', 0.07, -0.58, -0.55, 0.24, 0.85, -2.08, -0.26, 1.38, 0.08, -0.11, -1.82, -0.93, 0.7, 1.25, -0.53, -0.03, -2.57, -1.91, -3.22, -0.99, 0.46, -1.8, 0.32, -0.9, 2.63], ['413487.3', 0, 3955, '7.35b', 'Azure Ray', 'G2.iG', 'Lou', 'fy', '天命', 'Faith_bian', 'Ori', 'JT-', 'xNova', 'Monet', 'NothingToSay', 'BoBoKa', 'Terrorblade', 'Rubick', 'Leshrac', 'Centaur Warrunner', 'Storm Spirit', 'Magnus', 'Shadow Demon', 'Luna', 'Razor', 'Hoodwink', '53.42043', '58.38978', '52.842556', 50.0, '55.028183', '52.712887', 50.0, '54.84208', 50.0, 50.0, '125', '372', '102', 30, 30, 30, 30, '62', 30, 30, '48.0', '56.182796', '50.980396', 50.0, 50.0, 50.0, 50.0, '53.22581', 50.0, 50.0, '49.42', '45.34', '51.02', '52.41', '46.16', '47.72', '46.61', '49.73', '49.14', '50.95', -0.25, -0.65, -1.67, -0.7, 0.36, -0.86, 0.72, -1.87, 1.09, 0.35, -1.98, -0.99, -0.44, -0.1, 0.75, 0.33, -0.9, -0.13, 0.03, -1.09, -0.44, -2.07, 0.27, -1.35, -1.62]])
+
     df = pd.read_csv('matches.csv')
     df.drop(df.columns[[0]], axis=1, inplace=True)
-    print(df)
-    #df = pd.DataFrame([[1, 'Sporkface Killaz', 'Bullish on Gaming', 'Kurona', 'babitich', 'jah', 'Chola', 'Fayde', 'Mark', 'Froogoss', 'NFLS.ClouD', 'Harold', 'Double King', 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, '49.41', '51.04', '54.92', '50.19', '51.85', '47.34', '46.43', '48.89', '50.24', '48.96', 0.5, -0.54, -0.59, 0.54, 0.37, 0.48, -0.15, 1.57, 1.07, 1.59, -0.53, -0.23, 2.78, 0.27, -0.28, 1.16, -0.71, -0.02, -0.07, 0.96, 1.55, 0.99, -0.15, -3.49, 1.3]])
-    for j in range(200):
+    print(df.head())
+    print(df.shape)
+
+    j = 0
+    while 1:
         for i in range(100):
             cur_matches = parse_matches()
             if len(cur_matches) > 0:
@@ -181,8 +39,11 @@ if __name__ == '__main__':
                     df.loc[-1] = [*match]
                     df.index = df.index + 1
                     df = df.sort_index()
-        print('соточка прошла')
+        print('соточка прошла', j)
         df.to_csv('matches.csv')
+        j += 1
 
-    print(df)
-    '''
+    print(df.head())
+    print(df.shape)
+
+

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>predict_user</class>
+ <widget class="QDialog" name="predict_user">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1366</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>40</y>
+     <width>141</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 22pt &quot;Sans Serif Collection&quot;;
+color: rgb(0, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string>USER</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PredictButton">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>650</y>
+     <width>200</width>
+     <height>70</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Predict</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>390</y>
+     <width>289</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="0">
+     <widget class="QComboBox" name="team1_hero3_select_menu"/>
+    </item>
+    <item row="1" column="1">
+     <widget class="QComboBox" name="team1_hero4_select_menu"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QComboBox" name="team1_hero5_select_menu"/>
+    </item>
+    <item row="0" column="1">
+     <widget class="QComboBox" name="team1_hero2_select_menu"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QComboBox" name="team1_hero1_select_menu"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>390</y>
+     <width>289</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="1">
+     <widget class="QComboBox" name="team2_hero2_select_menu"/>
+    </item>
+    <item row="1" column="1">
+     <widget class="QComboBox" name="team2_hero4_select_menu"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QComboBox" name="team2_hero3_select_menu"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QComboBox" name="team2_hero1_select_menu"/>
+    </item>
+    <item row="2" column="1">
+     <widget class="QComboBox" name="team2_hero5_select_menu"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="winner_label">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>330</y>
+     <width>400</width>
+     <height>300</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 20pt &quot;Sans Serif Collection&quot;;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="img">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>1361</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <zorder>img</zorder>
+  <zorder>label</zorder>
+  <zorder>comboBox</zorder>
+  <zorder>comboBox_2</zorder>
+  <zorder>comboBox_3</zorder>
+  <zorder>comboBox_4</zorder>
+  <zorder>comboBox_5</zorder>
+  <zorder>PredictButton</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>layoutWidget_2</zorder>
+  <zorder>winner_label</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
